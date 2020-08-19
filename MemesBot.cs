@@ -23,11 +23,11 @@ namespace VKBOT
         };
         private HashSet<long?> _admins = new HashSet<long?>()
         {
-            43841691
+            //my id
         };
         private HashSet<string> _memes = new HashSet<string>();
 
-        private const long _superAdminID = 43841691;
+        private const long _superAdminID = //my id;
 
         private string _token;
         private ulong _groupID;
@@ -90,8 +90,6 @@ namespace VKBOT
                                     _UserID = update.Message.UserId;
                                     var request = ParseCommand(update.Message.Body.ToLower());
 
-                                    
-
                                     if(request.Command == "мем")
                                     {
                                         WebClient wc = new WebClient();
@@ -137,7 +135,6 @@ namespace VKBOT
                                                 {
                                                     client.DownloadFile(GetPhotoUrl(toDownload), Directory.GetCurrentDirectory() + @"\memes\" + ParseEscapes(request.Message)+ GetFormatFromUrl(GetPhotoUrl(toDownload)));
                                                 }
-
 
                                                 api.Messages.Send(new MessagesSendParams()
                                                 {
@@ -201,9 +198,7 @@ namespace VKBOT
                                             Message = "Не знаю такой команды, напиши \"хелп\", чтобы увидеть список команд",
                                             RandomId = GetRandomNullableInt()
                                         });
-                                    }
-
-                                    
+                                    }                    
                                 }
                             }
                         }
@@ -227,13 +222,13 @@ namespace VKBOT
                         }
                     }
             });
-            
-
         }
+        
         public void Stop()
         {
             IsRunning = false;
         }
+        
         private string GetPathToMeme(string request)
         {
             if(File.Exists(Directory.GetCurrentDirectory() + @"\memes\" +  request  + ".jpg" ))
@@ -256,6 +251,7 @@ namespace VKBOT
                 throw new HasNotFoundException();
             }
         }
+        
         private (string Command, string Message) ParseCommand(string request)
         {
             bool wasEscape = false;
@@ -280,6 +276,7 @@ namespace VKBOT
 
             return (Command, Message);
         }
+        
         private static int? GetRandomNullableInt()
         {
             int? result = 0;
@@ -287,6 +284,7 @@ namespace VKBOT
 
             return result + tmp;
         }
+        
         private static string GetPhotoUrl(Photo photo)
         {
             if (photo.Url != null)
@@ -354,6 +352,7 @@ namespace VKBOT
             }
 
         }
+        
         private string GetFormatFromUrl(string request)
         {
             var mass = request.Split('.');
@@ -377,6 +376,7 @@ namespace VKBOT
 
             return result;
         }
+        
         private void InitializeMemes()
         {
             foreach(var path in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\memes\"))
@@ -396,6 +396,7 @@ namespace VKBOT
             }
 
         }
+        
         private void AddAdmin(string id)
         {
             long parsedId;
@@ -415,6 +416,7 @@ namespace VKBOT
                 throw new AddRemoveException("Неверный ID");
             }
         }
+        
         private void RemoveAdmins(string toRemove)
         {
             long idToRemove;
