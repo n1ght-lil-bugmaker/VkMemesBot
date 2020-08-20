@@ -58,7 +58,6 @@ namespace VKBOT
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
 
@@ -109,7 +108,6 @@ namespace VKBOT
                                             wc.UploadFile(uploadServer.UploadUrl,
                                             GetPathToMeme(ChangeSymbols(request.Message, ' ', '_'))));
 
-
                                         var photo = api.Photo.SaveMessagesPhoto(response);
 
                                         api.Messages.Send(new MessagesSendParams()
@@ -142,9 +140,10 @@ namespace VKBOT
 
                                                 using(WebClient client = new WebClient())
                                                 {
-                                                    client.DownloadFile(GetPhotoUrl(toDownload), Directory.GetCurrentDirectory() + @"\memes\" + ChangeSymbols(request.Message, ' ', '_') + GetFormatFromUrl(GetPhotoUrl(toDownload)));
+                                                    client.DownloadFile(GetPhotoUrl(toDownload), Directory.GetCurrentDirectory() + @"\memes\" 
+                                                    + ChangeSymbols(request.Message, ' ', '_')
+                                                    + GetFormatFromUrl(GetPhotoUrl(toDownload)));
                                                 }
-
 
                                                 api.Messages.Send(new MessagesSendParams()
                                                 {
