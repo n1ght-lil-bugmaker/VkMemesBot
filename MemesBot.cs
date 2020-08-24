@@ -23,11 +23,11 @@ namespace VKBOT
         };
         private HashSet<long?> _admins = new HashSet<long?>()
         {
-            43841691
+            //my id
         };
         private HashSet<string> _memes = new HashSet<string>();
 
-        private const long _superAdminID = 43841691;
+        private const long _superAdminID = //my id;
 
         private string _token;
         private ulong _groupID;
@@ -89,8 +89,6 @@ namespace VKBOT
                                 {
                                     _UserID = update.Message.UserId;
                                     var request = ParseCommand(update.Message.Body.ToLower());
-
-                                    
 
                                     if(request.Command == "мем")
                                     {
