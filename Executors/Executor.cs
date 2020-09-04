@@ -25,11 +25,8 @@ namespace VKBOT
             Api = api;
             UserID = userId;
             PersonID = personID;
-
-            if(additional[0] != null)
-            {
-                photo = additional[0] as Photo;
-            }  
+            photo = additional[0] as Photo;
+ 
 
             var request = ParseCommand(message);
             requestMessage = request.Message;
