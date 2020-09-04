@@ -11,20 +11,32 @@ namespace VKBOT
     {
         public override void Execute()
         {
-            using (WebClient client = new WebClient())
+           try
             {
-                client.DownloadFile(GetPhotoUrl(photo), Directory.GetCurrentDirectory()
-                    + @"\memes\" + ChangeSymbols(requestMessage, ' ', '_')
-                    + GetFormatFromUrl(GetPhotoUrl(photo)));
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFile(GetPhotoUrl(photo), Directory.GetCurrentDirectory()
+                        + @"\memes\" + ChangeSymbols(requestMessage, ' ', '_')
+                        + GetFormatFromUrl(GetPhotoUrl(photo)));
+                }
+
+
+                Api.Messages.Send(new MessagesSendParams()
+                {
+                    UserId = UserID,
+                    Message = $"Мем {requestMessage} добавлен",
+                    RandomId = GetRandomNullableInt()
+                });
             }
-
-
-            Api.Messages.Send(new MessagesSendParams()
+            catch(NullReferenceException)
             {
-                UserId = UserID,
-                Message = $"Мем {requestMessage} добавлен",
-                RandomId = GetRandomNullableInt()
-            });
+                Api.Messages.Send(new MessagesSendParams()
+                {
+                    UserId = UserID,
+                    Message = "А что добавить-то?",
+                    RandomId = GetRandomNullableInt()
+                });
+            }
         }
     }
 }
